@@ -37,10 +37,8 @@ public class DatabaseConnection {
         ResultSet rs = stmt.executeQuery("SELECT * FROM FILM");
 
         while (rs.next()) {
-            // Assuming FILM table has columns like "title", "director", etc.
             String title = rs.getString("denumire");
             String nota = rs.getString("nota");
-            // ... process other columns as needed
             System.out.println("Film: " + title + " (Nota: " + nota + ")");
         }
 
