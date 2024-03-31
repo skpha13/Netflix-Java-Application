@@ -1,9 +1,9 @@
 package service;
 
-import oracle.jdbc.OraclePreparedStatement;
+import model.AuditEntity;
+
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class DatabaseConnection {
     //singleton class
@@ -32,16 +32,46 @@ public class DatabaseConnection {
         return instance;
     }
 
-    public static int testConnection() throws SQLException {
-        Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM FILM");
+    public static void testConnection() throws SQLException {
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM FILM");
 
-        while (rs.next()) {
-            String title = rs.getString("denumire");
-            String nota = rs.getString("nota");
-            System.out.println("Film: " + title + " (Nota: " + nota + ")");
+            while (rs.next()) {
+                String title = rs.getString("denumire");
+                String nota = rs.getString("nota");
+                System.out.println("Film: " + title + " (Nota: " + nota + ")");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static ArrayList<AuditEntity> audit() throws SQLException {
+        ArrayList<AuditEntity> result = new ArrayList<>();
+
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("""
+                    select object_schema,
+                           object_name,
+                           sql_text
+                    from UNIFIED_AUDIT_TRAIL
+                    where current_user = 'UTILIZATOR' and UNIFIED_AUDIT_POLICIES = 'AUDIT_ALL_OPERATIONS'""");
+
+            while (rs.next()) {
+                AuditEntity entity = new AuditEntity(
+                        rs.getString("object_schema"),
+                        rs.getString("object_name"),
+                        rs.getString("sql_text").replace("\n", " ")
+                );
+
+                result.add(entity);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
-        return 0;
+        return result;
     }
 }
