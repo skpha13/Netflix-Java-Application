@@ -1,9 +1,11 @@
 import model.AuditEntity;
+import persistence.UtilizatorRepository;
 import service.Audit;
 import service.DatabaseConnection;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
     private static DatabaseConnection db;
@@ -11,10 +13,13 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         Main.db = DatabaseConnection.getInstance();
-        DatabaseConnection.testConnection();
+//        DatabaseConnection.testConnection();
 
-        auditService = Audit.getInstance();
+        /*auditService = Audit.getInstance();
         ArrayList<AuditEntity> audit_list = DatabaseConnection.audit();
-        Audit.log_multiple(audit_list);
+        Audit.log_multiple(audit_list);*/
+
+        UtilizatorRepository utilizator = new UtilizatorRepository(db);
+//        System.out.println(Arrays.toString(utilizator.getAll().toArray()));
     }
 }

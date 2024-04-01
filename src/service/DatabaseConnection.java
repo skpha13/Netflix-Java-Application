@@ -12,7 +12,7 @@ public class DatabaseConnection {
     private static final String DB_USER = System.getenv("DB_USER");
     private static final String DB_PASS = System.getenv("DB_PASS");
 
-    private static Connection connection;
+    public static Connection connection;
     private static DatabaseConnection instance;
 
     private DatabaseConnection(){

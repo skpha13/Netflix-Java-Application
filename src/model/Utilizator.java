@@ -1,13 +1,13 @@
 package model;
 
 public class Utilizator {
-    private String utilizator_id;
-    private String subscriptie_id;
+    private int utilizator_id;
+    private int subscriptie_id;
     private String porecla;
     private String mail;
     private String parola;
 
-    public Utilizator(String utilizator_id, String subscriptie_id, String porecla, String mail, String parola) {
+    public Utilizator(int utilizator_id, int subscriptie_id, String porecla, String mail, String parola) {
         this.utilizator_id = utilizator_id;
         this.subscriptie_id = subscriptie_id;
         this.porecla = porecla;
@@ -15,19 +15,19 @@ public class Utilizator {
         this.parola = parola;
     }
 
-    public String getUtilizator_id() {
+    public int getUtilizator_id() {
         return utilizator_id;
     }
 
-    public void setUtilizator_id(String utilizator_id) {
+    public void setUtilizator_id(int utilizator_id) {
         this.utilizator_id = utilizator_id;
     }
 
-    public String getSubscriptie_id() {
+    public int getSubscriptie_id() {
         return subscriptie_id;
     }
 
-    public void setSubscriptie_id(String subscriptie_id) {
+    public void setSubscriptie_id(int subscriptie_id) {
         this.subscriptie_id = subscriptie_id;
     }
 
@@ -53,5 +53,16 @@ public class Utilizator {
 
     public void setParola(String parola) {
         this.parola = parola;
+    }
+
+    @Override
+    public String toString() {
+        return "Utilizator{" +
+                "utilizator_id=" + utilizator_id +
+                ", subscriptie_id=" + subscriptie_id +
+                ", porecla='" + porecla + '\'' +
+                ", mail='" + mail + '\'' +
+                ", parola='" + parola + '\'' +
+                '}';
     }
 }
