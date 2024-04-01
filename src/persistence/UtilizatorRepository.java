@@ -1,5 +1,6 @@
 package persistence;
 
+import model.Subscriptie;
 import model.Utilizator;
 import oracle.jdbc.OraclePreparedStatement;
 import service.DatabaseConnection;
@@ -44,9 +45,10 @@ public class UtilizatorRepository implements GenericRepository<Utilizator> {
     @Override
     public Utilizator get(int id) {
         String sql = """
-                SELECT utilizator_id, subscriptie_id, porecla, mail, parola
+                select *
                 from UTILIZATOR
-                where utilizator_id = ?
+                join UTILIZATOR.SUBSCRIPTIE S2 on S2.SUBSCRIPTIE_ID = UTILIZATOR.SUBSCRIPTIE_ID
+                where UTILIZATOR.UTILIZATOR_ID = ?
                 """;
 
         PreparedStatement stmt = null;
@@ -59,6 +61,7 @@ public class UtilizatorRepository implements GenericRepository<Utilizator> {
                 Utilizator u = new Utilizator(
                         rs.getInt("utilizator_id"),
                         rs.getInt("subscriptie_id"),
+                        new Subscriptie(rs.getInt("subscriptie_id"), rs.getString("tip"), rs.getInt("cost")),
                         rs.getString("porecla"),
                         rs.getString("mail"),
                         rs.getString("parola")
@@ -79,8 +82,9 @@ public class UtilizatorRepository implements GenericRepository<Utilizator> {
         ArrayList<Utilizator> list = new ArrayList<>();
 
         String sql =  """
-                SELECT utilizator_id, subscriptie_id, porecla, mail, parola
+                SELECT *
                 from UTILIZATOR
+                join UTILIZATOR.SUBSCRIPTIE S2 on S2.SUBSCRIPTIE_ID = UTILIZATOR.SUBSCRIPTIE_ID
                 """;
 
         try {
@@ -91,6 +95,7 @@ public class UtilizatorRepository implements GenericRepository<Utilizator> {
                 Utilizator u = new Utilizator(
                         rs.getInt("utilizator_id"),
                         rs.getInt("subscriptie_id"),
+                        new Subscriptie(rs.getInt("subscriptie_id"), rs.getString("tip"), rs.getInt("cost")),
                         rs.getString("porecla"),
                         rs.getString("mail"),
                         rs.getString("parola")

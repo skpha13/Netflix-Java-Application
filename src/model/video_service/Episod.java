@@ -1,13 +1,13 @@
 package model.video_service;
 
 public class Episod {
-    private String episod_id;
-    private String serial_id;
+    private int episod_id;
+    private int serial_id;
     private String denumire;
-    private String numar;
-    private String durata;
+    private int numar;
+    private int durata;
 
-    public Episod(String episod_id, String serial_id, String denumire, String numar, String durata) {
+    public Episod(int episod_id, int serial_id, String denumire, int numar, int durata) {
         this.episod_id = episod_id;
         this.serial_id = serial_id;
         this.denumire = denumire;
@@ -15,19 +15,19 @@ public class Episod {
         this.durata = durata;
     }
 
-    public String getEpisod_id() {
+    public int getEpisod_id() {
         return episod_id;
     }
 
-    public void setEpisod_id(String episod_id) {
+    public void setEpisod_id(int episod_id) {
         this.episod_id = episod_id;
     }
 
-    public String getSerial_id() {
+    public int getSerial_id() {
         return serial_id;
     }
 
-    public void setSerial_id(String serial_id) {
+    public void setSerial_id(int serial_id) {
         this.serial_id = serial_id;
     }
 
@@ -39,19 +39,30 @@ public class Episod {
         this.denumire = denumire;
     }
 
-    public String getNumar() {
+    public int getNumar() {
         return numar;
     }
 
-    public void setNumar(String numar) {
+    public void setNumar(int numar) {
         this.numar = numar;
     }
 
-    public String getDurata() {
+    public int getDurata() {
         return durata;
     }
 
-    public void setDurata(String durata) {
+    public void setDurata(int durata) {
         this.durata = durata;
+    }
+
+    @Override
+    public String toString() {
+        return "Episod {" +
+                "\n\tepisod_id = " + episod_id +
+                "\n\tserial_id = " + serial_id +
+                "\n\tdenumire = " + denumire +
+                "\n\tnumar = " + numar +
+                "\n\tdurata = " + durata +
+                "\n}";
     }
 }

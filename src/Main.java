@@ -22,8 +22,8 @@ public class Main {
         ArrayList<AuditEntity> audit_list = DatabaseConnection.audit();
         Audit.log_multiple(audit_list);*/
 
-        /*UtilizatorRepository utilizator = new UtilizatorRepository(db);
-        System.out.println(Arrays.toString(utilizator.getAll().toArray()));*/
+        UtilizatorRepository utilizator = new UtilizatorRepository(db);
+        System.out.println(Arrays.toString(utilizator.getAll().toArray()));
 
         /*SubscriptieRepository sub = new SubscriptieRepository(db);
         System.out.println(sub.get(55245));
