@@ -36,6 +36,8 @@ public class Main {
         /*SerialRepository serial = new SerialRepository(db, episod);
         System.out.println(Arrays.toString(serial.getAll().toArray()));*/
 
-        
+
+//        TODO: insert in associative tables as well
+//        TODO: connect subscription with film/serial through associative tables
     }
 }
