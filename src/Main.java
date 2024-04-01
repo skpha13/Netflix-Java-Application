@@ -1,5 +1,6 @@
 import model.AuditEntity;
 import model.Subscriptie;
+import persistence.FilmRepository;
 import persistence.SubscriptieRepository;
 import persistence.UtilizatorRepository;
 import service.Audit;
@@ -27,5 +28,8 @@ public class Main {
         /*SubscriptieRepository sub = new SubscriptieRepository(db);
         System.out.println(sub.get(55245));
         System.out.println(Arrays.toString(sub.getAll().toArray()));*/
+
+        /*FilmRepository film = new FilmRepository(db);
+        System.out.println(Arrays.toString(film.getAll().toArray()));*/
     }
 }

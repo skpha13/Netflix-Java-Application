@@ -1,9 +1,17 @@
 package model.video_service;
 
+import java.sql.Date;
+
 public abstract class Video {
     private String denumire;
     private float nota;
-    private String data_aparitie;
+    private Date data_aparitie;
+
+    public Video(String denumire, float nota, Date data_aparitie) {
+        this.denumire = denumire;
+        this.nota = nota;
+        this.data_aparitie = data_aparitie;
+    }
 
     public String getDenumire() {
         return denumire;
@@ -21,11 +29,18 @@ public abstract class Video {
         this.nota = nota;
     }
 
-    public String getData_aparitie() {
+    public Date getData_aparitie() {
         return data_aparitie;
     }
 
-    public void setData_aparitie(String data_aparitie) {
+    public void setData_aparitie(Date data_aparitie) {
         this.data_aparitie = data_aparitie;
+    }
+
+    @Override
+    public String toString() {
+        return  "\n\tdenumire = " + denumire +
+                "\n\tnota = " + nota +
+                "\n\tdata_aparitie = " + data_aparitie;
     }
 }
