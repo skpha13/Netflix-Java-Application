@@ -1,4 +1,6 @@
 import model.AuditEntity;
+import model.Subscriptie;
+import persistence.SubscriptieRepository;
 import persistence.UtilizatorRepository;
 import service.Audit;
 import service.DatabaseConnection;
@@ -19,7 +21,11 @@ public class Main {
         ArrayList<AuditEntity> audit_list = DatabaseConnection.audit();
         Audit.log_multiple(audit_list);*/
 
-        UtilizatorRepository utilizator = new UtilizatorRepository(db);
-//        System.out.println(Arrays.toString(utilizator.getAll().toArray()));
+        /*UtilizatorRepository utilizator = new UtilizatorRepository(db);
+        System.out.println(Arrays.toString(utilizator.getAll().toArray()));*/
+
+        /*SubscriptieRepository sub = new SubscriptieRepository(db);
+        System.out.println(sub.get(55245));
+        System.out.println(Arrays.toString(sub.getAll().toArray()));*/
     }
 }

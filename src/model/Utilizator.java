@@ -57,12 +57,12 @@ public class Utilizator {
 
     @Override
     public String toString() {
-        return "Utilizator{" +
-                "utilizator_id=" + utilizator_id +
-                ", subscriptie_id=" + subscriptie_id +
-                ", porecla='" + porecla + '\'' +
-                ", mail='" + mail + '\'' +
-                ", parola='" + parola + '\'' +
-                '}';
+        return "Utilizator {\n" +
+                "\tutilizator_id = " + utilizator_id +
+                "\n\tsubscriptie_id = " + subscriptie_id +
+                "\n\tporecla = " + porecla +
+                "\n\tmail = " + mail +
+                "\n\tparola = " + parola +
+                "\n}\n";
     }
 }

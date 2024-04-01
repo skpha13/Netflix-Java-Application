@@ -1,21 +1,21 @@
 package model;
 
 public class Subscriptie {
-    private String subscriptie_id;
+    private int subscriptie_id;
     private String tip;
     private int cost;
 
-    public Subscriptie(String subscriptie_id, String tip, int cost) {
+    public Subscriptie(int subscriptie_id, String tip, int cost) {
         this.subscriptie_id = subscriptie_id;
         this.tip = tip;
         this.cost = cost;
     }
 
-    public String getSubscriptie_id() {
+    public int getSubscriptie_id() {
         return subscriptie_id;
     }
 
-    public void setSubscriptie_id(String subscriptie_id) {
+    public void setSubscriptie_id(int subscriptie_id) {
         this.subscriptie_id = subscriptie_id;
     }
 
@@ -33,5 +33,14 @@ public class Subscriptie {
 
     public void setCost(int cost) {
         this.cost = cost;
+    }
+
+    @Override
+    public String toString() {
+        return "Subscriptie {" +
+                "\n\tsubscriptie_id = " + subscriptie_id +
+                "\n\ttip = " + tip +
+                "\n\tcost = " + cost +
+                "\n}\n";
     }
 }
