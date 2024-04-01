@@ -59,10 +59,9 @@ public class Episod {
     public String toString() {
         return "Episod {" +
                 "\n\tepisod_id = " + episod_id +
-                "\n\tserial_id = " + serial_id +
                 "\n\tdenumire = " + denumire +
                 "\n\tnumar = " + numar +
                 "\n\tdurata = " + durata +
-                "\n}";
+                "\n}\n";
     }
 }

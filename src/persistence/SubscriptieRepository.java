@@ -75,7 +75,8 @@ public class SubscriptieRepository implements GenericRepository<Subscriptie>{
                  """;
 
         ArrayList<Subscriptie> subscriptii = new ArrayList<>();
-        try (PreparedStatement stmt = db.connection.prepareStatement(sql)) {
+        try {
+            PreparedStatement stmt = db.connection.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -100,7 +101,8 @@ public class SubscriptieRepository implements GenericRepository<Subscriptie>{
                  where subscriptie_id = ?
                  """;
 
-        try (PreparedStatement stmt = db.connection.prepareStatement(sql)) {
+        try {
+            PreparedStatement stmt = db.connection.prepareStatement(sql);
             stmt.setString(1, entity.getTip());
             stmt.setInt(2, entity.getCost());
             stmt.setInt(3, entity.getSubscriptie_id());
@@ -117,7 +119,8 @@ public class SubscriptieRepository implements GenericRepository<Subscriptie>{
                  where subscriptie_id = ?
                  """;
 
-        try (PreparedStatement stmt = db.connection.prepareStatement(sql)) {
+        try {
+            PreparedStatement stmt = db.connection.prepareStatement(sql);
             stmt.setInt(1, entity.getSubscriptie_id());
             stmt.executeUpdate();
         } catch (SQLException e) {

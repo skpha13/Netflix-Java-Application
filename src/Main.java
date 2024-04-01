@@ -1,8 +1,6 @@
 import model.AuditEntity;
 import model.Subscriptie;
-import persistence.FilmRepository;
-import persistence.SubscriptieRepository;
-import persistence.UtilizatorRepository;
+import persistence.*;
 import service.Audit;
 import service.DatabaseConnection;
 
@@ -22,8 +20,8 @@ public class Main {
         ArrayList<AuditEntity> audit_list = DatabaseConnection.audit();
         Audit.log_multiple(audit_list);*/
 
-        UtilizatorRepository utilizator = new UtilizatorRepository(db);
-        System.out.println(Arrays.toString(utilizator.getAll().toArray()));
+        /*UtilizatorRepository utilizator = new UtilizatorRepository(db);
+        System.out.println(Arrays.toString(utilizator.getAll().toArray()));*/
 
         /*SubscriptieRepository sub = new SubscriptieRepository(db);
         System.out.println(sub.get(55245));
@@ -31,5 +29,13 @@ public class Main {
 
         /*FilmRepository film = new FilmRepository(db);
         System.out.println(Arrays.toString(film.getAll().toArray()));*/
+
+        /*EpisodRepository episod = new EpisodRepository(db);
+        System.out.println(Arrays.toString(episod.getAll().toArray()));*/
+
+        /*SerialRepository serial = new SerialRepository(db, episod);
+        System.out.println(Arrays.toString(serial.getAll().toArray()));*/
+
+        
     }
 }
