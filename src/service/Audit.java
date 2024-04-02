@@ -27,20 +27,6 @@ public class Audit {
         return instance;
     }
 
-    public static void setFilePath(String _path){
-        try {
-            path = _path;
-            writer  = new FileWriter(path);
-        } catch (IOException e) {
-            System.out.println("Couldn't set custom file path. Seting up default file path: audit.csv");
-            try {
-                writer  = new FileWriter("audit.csv");
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
-    }
-
     public static void log(AuditEntity audit){
         try {
             writer.append(audit.getSchema());

@@ -25,3 +25,12 @@ select object_schema,
        sql_text
 from UNIFIED_AUDIT_TRAIL
 where current_user = 'UTILIZATOR' and UNIFIED_AUDIT_POLICIES = 'AUDIT_ALL_OPERATIONS';
+
+-- PL/SQL STATEMENT TO PURGE UNIFIED_AUDIT_TRAIL
+BEGIN
+    DBMS_AUDIT_MGMT.CLEAN_AUDIT_TRAIL(
+            AUDIT_TRAIL_TYPE => DBMS_AUDIT_MGMT.AUDIT_TRAIL_UNIFIED,
+            USE_LAST_ARCH_TIMESTAMP => FALSE,
+            CONTAINER => dbms_audit_mgmt.container_current);
+END;
+/

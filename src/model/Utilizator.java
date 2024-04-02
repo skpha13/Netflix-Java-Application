@@ -62,14 +62,6 @@ public class Utilizator implements ReadUpdateInterface {
         this.parola = parola;
     }
 
-    public Subscriptie getSubscriptie() {
-        return subscriptie;
-    }
-
-    public void setSubscriptie(Subscriptie subscriptie) {
-        this.subscriptie = subscriptie;
-    }
-
     @Override
     public String toString() {
         String sub = "Subscriptie { None }";

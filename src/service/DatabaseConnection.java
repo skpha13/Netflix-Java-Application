@@ -32,21 +32,6 @@ public class DatabaseConnection {
         return instance;
     }
 
-    public static void testConnection() throws SQLException {
-        try {
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM FILM");
-
-            while (rs.next()) {
-                String title = rs.getString("denumire");
-                String nota = rs.getString("nota");
-                System.out.println("Film: " + title + " (Nota: " + nota + ")");
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static ArrayList<AuditEntity> audit() throws SQLException {
         ArrayList<AuditEntity> result = new ArrayList<>();
 

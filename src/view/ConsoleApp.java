@@ -1,20 +1,27 @@
 package view;
 
 import exceptions.OperationNotSupportedException;
+import model.AuditEntity;
 import model.ReadUpdateInterface;
 import model.Utilizator;
+import model.associative_entities.SubscriptieFilm;
+import model.associative_entities.SubscriptieSerial;
 import model.video_service.Episod;
 import model.video_service.Film;
 import model.video_service.Serial;
 import persistence.*;
+import service.Audit;
 import service.DatabaseConnection;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class ConsoleApp {
     private static ConsoleApp instance;
     private DatabaseConnection db;
+    private Audit audit;
     private UtilizatorRepository utilizatorRepository;
     private SubscriptieRepository subscriptieRepository;
     private FilmRepository filmRepository;
@@ -25,8 +32,8 @@ public class ConsoleApp {
 
     private ConsoleApp() {
         db = DatabaseConnection.getInstance();
+        audit = Audit.getInstance();
         utilizatorRepository = new UtilizatorRepository(db);
-        subscriptieRepository = new SubscriptieRepository(db);
         filmRepository = new FilmRepository(db);
         episodRepository = new EpisodRepository(db);
         serialRepository = new SerialRepository(db, episodRepository);
@@ -57,6 +64,13 @@ public class ConsoleApp {
                 case 3 -> updateMenu();
                 case 4 -> deleteMenu();
                 case 5 -> connectMenu();
+                case 6 -> {
+                    try {
+                        audit.log_multiple(db.audit());
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
                 case 0 -> {
                     return;
                 }
@@ -66,7 +80,88 @@ public class ConsoleApp {
     }
 
     public void connectMenu() {
+        Scanner sc = new Scanner(System.in);
+        int option = -1;
 
+        while (true) {
+            printConnectMenu();
+            System.out.println("Enter option# ");
+            option = sc.nextInt();
+            sc.nextLine();
+
+            switch (option) {
+                case 1 -> {
+                    System.out.println(Arrays.toString(utilizatorRepository.getAll().toArray()));
+                    System.out.println("Enter user ID: ");
+
+                    int userId = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.println(Arrays.toString(subscriptieRepository.getAll().toArray()));
+                    System.out.println("Enter subscription ID: ");
+
+                    int subscriptionId = sc.nextInt();
+                    sc.nextLine();
+
+                    Utilizator u = utilizatorRepository.get(userId);
+                    u.setSubscriptie_id(subscriptionId);
+
+                    utilizatorRepository.update(u);
+                }
+                case 2 -> {
+                    System.out.println(Arrays.toString(filmRepository.getAll().toArray()));
+                    System.out.println("Enter movie ID: ");
+
+                    int filmId = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.println(Arrays.toString(subscriptieRepository.getAll().toArray()));
+                    System.out.println("Enter subscription ID: ");
+
+                    int subscriptionId = sc.nextInt();
+                    sc.nextLine();
+
+                    subscriptieFilmRepository.add(new SubscriptieFilm(filmId, subscriptionId));
+                }
+                case 3 -> {
+                    System.out.println(Arrays.toString(serialRepository.getAll().toArray()));
+                    System.out.println("Enter series ID: ");
+
+                    int serialId = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.println(Arrays.toString(subscriptieRepository.getAll().toArray()));
+                    System.out.println("Enter subscription ID: ");
+
+                    int subscriptionId = sc.nextInt();
+                    sc.nextLine();
+
+                    subscriptieSerialRepository.add(new SubscriptieSerial(serialId, subscriptionId));
+                }
+                case 4 -> {
+                    System.out.println(Arrays.toString(episodRepository.getAll().toArray()));
+                    System.out.println("Enter episode ID: ");
+
+                    int episodId = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.println(Arrays.toString(serialRepository.getAll().toArray()));
+                    System.out.println("Enter series ID: ");
+
+                    int serialId = sc.nextInt();
+                    sc.nextLine();
+
+                    Episod e = episodRepository.get(episodId);
+                    e.setSerial_id(serialId);
+
+                    episodRepository.update(e);
+                }
+                case 0 -> {
+                    return;
+                }
+                default -> System.out.println("~ INVALID OPTION");
+            }
+        }
     }
 
     public void deleteMenu() {
@@ -234,7 +329,7 @@ public class ConsoleApp {
         System.out.println("3 - Update menu");
         System.out.println("4 - Delete menu");
         System.out.println("5 - Connect menu");
-        System.out.println("6 - Audit menu");
+        System.out.println("6 - Force Audit");
         System.out.println("0 - Exit the program");
         System.out.println("==================================================");
     }

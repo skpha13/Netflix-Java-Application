@@ -15,23 +15,11 @@ public class AuditEntity {
         return schema;
     }
 
-    public void setSchema(String schema) {
-        this.schema = schema;
-    }
-
     public String getTable() {
         return table;
     }
 
-    public void setTable(String table) {
-        this.table = table;
-    }
-
     public String getSqlStatement() {
         return sqlStatement;
-    }
-
-    public void setSqlStatement(String sqlStatement) {
-        this.sqlStatement = sqlStatement;
     }
 }

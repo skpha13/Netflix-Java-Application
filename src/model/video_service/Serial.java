@@ -19,14 +19,6 @@ public class Serial extends Video {
         this.episoade = episoade;
     }
 
-    public ArrayList<Episod> getEpisoade() {
-        return episoade;
-    }
-
-    public void setEpisoade(ArrayList<Episod> episoade) {
-        this.episoade = episoade;
-    }
-
     public int getSerial_id() {
         return serial_id;
     }
