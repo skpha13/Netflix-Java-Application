@@ -1,6 +1,8 @@
 package model;
 
-public class Subscriptie {
+import java.util.Scanner;
+
+public class Subscriptie implements ReadUpdateInterface {
     private int subscriptie_id;
     private String tip;
     private int cost;
@@ -42,5 +44,42 @@ public class Subscriptie {
                 "\n\ttip = " + tip +
                 "\n\tcost = " + cost +
                 "\n}\n";
+    }
+
+    @Override
+    public void read() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter subscriptie id: ");
+        setSubscriptie_id(sc.nextInt());
+        sc.nextLine();
+
+        System.out.println("Enter tip: ");
+        setTip(sc.nextLine());
+
+        System.out.println("Enter cost: ");
+        setCost(sc.nextInt());
+        sc.nextLine();
+    }
+
+    @Override
+    public void update() {
+        Scanner sc = new Scanner(System.in);
+        String option;
+
+        System.out.println("Update tip? (y/n): ");
+        option = sc.nextLine();
+        if (option.equalsIgnoreCase("y")) {
+            System.out.println("Enter tip: ");
+            setTip(sc.nextLine());
+        }
+
+        System.out.println("Update cost? (y/n): ");
+        option = sc.nextLine();
+        if (option.equalsIgnoreCase("y")) {
+            System.out.println("Enter cost: ");
+            setCost(sc.nextInt());
+            sc.nextLine();
+        }
     }
 }

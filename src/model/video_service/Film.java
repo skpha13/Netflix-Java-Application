@@ -1,6 +1,7 @@
 package model.video_service;
 
 import java.sql.Date;
+import java.util.Scanner;
 
 public class Film extends Video {
     private int film_id;
@@ -24,5 +25,46 @@ public class Film extends Video {
                 "\n\tfilm_id = " + film_id +
                 super.toString() +
                 "\n}";
+    }
+
+    @Override
+    public void read() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter film ID: ");
+        setFilm_id(sc.nextInt());
+        sc.nextLine();
+
+        System.out.println("Enter film title: ");
+        setDenumire(sc.nextLine());
+
+        System.out.println("Enter rating: ");
+        setNota(sc.nextFloat());
+        sc.nextLine();
+
+        System.out.println("Enter release date (YYYY-MM-DD): ");
+        var date = sc.nextLine().split("-");
+        setData_aparitie(new Date(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2])));
+    }
+
+    @Override
+    public void update() {
+        Scanner sc = new Scanner(System.in);
+        String option;
+
+        System.out.println("Update film title? (y/n): ");
+        option = sc.nextLine();
+        if (option.equalsIgnoreCase("y")) {
+            System.out.println("Enter film title: ");
+            setDenumire(sc.nextLine());
+        }
+
+        System.out.println("Update rating? (y/n): ");
+        option = sc.nextLine();
+        if (option.equalsIgnoreCase("y")) {
+            System.out.println("Enter rating: ");
+            setNota(sc.nextFloat());
+            sc.nextLine();
+        }
     }
 }

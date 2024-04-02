@@ -1,12 +1,17 @@
 package model;
 
-public class Utilizator {
+import java.sql.SQLOutput;
+import java.util.Scanner;
+
+public class Utilizator implements ReadUpdateInterface {
     private int utilizator_id;
     private int subscriptie_id;
     private Subscriptie subscriptie;
     private String porecla;
     private String mail;
     private String parola;
+
+    public Utilizator() {}
 
     public Utilizator(int utilizator_id, int subscriptie_id, Subscriptie subscriptie, String porecla, String mail, String parola) {
         this.utilizator_id = utilizator_id;
@@ -67,12 +72,66 @@ public class Utilizator {
 
     @Override
     public String toString() {
+        String sub = "Subscriptie { None }";
+        if (subscriptie != null) {
+            sub = String.join("\n\t", subscriptie.toString().split("\n"));
+        }
+
         return "Utilizator {\n" +
                 "\tutilizator_id = " + utilizator_id +
-                "\n\t" + String.join("\n\t", subscriptie.toString().split("\n")) +
+                "\n\t" + sub +
                 "\n\tporecla = " + porecla +
                 "\n\tmail = " + mail +
                 "\n\tparola = " + parola +
                 "\n}\n";
+    }
+
+
+    @Override
+    public void read() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter user id: ");
+        setUtilizator_id(sc.nextInt());
+        sc.nextLine();
+
+        System.out.println("Enter nickname: ");
+        setPorecla(sc.nextLine());
+
+        System.out.println("Enter mail: ");
+        setMail(sc.nextLine());
+
+        System.out.println("Enter password: ");
+        setParola(sc.nextLine());
+    }
+
+    @Override
+    public void update() {
+        Scanner sc = new Scanner(System.in);
+        String option;
+
+        System.out.println("Update nickname? (y/n): ");
+        option = sc.nextLine();
+
+        if (option.equalsIgnoreCase("y")) {
+            System.out.println("Enter nickname: ");
+            setPorecla(sc.nextLine());
+        }
+
+        System.out.println("Update mail? (y/n): ");
+        option = sc.nextLine();
+
+        if (option.equalsIgnoreCase("y")) {
+            System.out.println("Enter mail: ");
+            setMail(sc.nextLine());
+        }
+
+        System.out.println("Update password? (y/n): ");
+        option = sc.nextLine();
+
+        if (option.equalsIgnoreCase("y")) {
+            System.out.println("Enter password: ");
+            setParola(sc.nextLine());
+        }
     }
 }

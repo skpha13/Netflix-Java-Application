@@ -1,8 +1,10 @@
 package model.video_service;
 
+import model.ReadUpdateInterface;
+
 import java.sql.Date;
 
-public abstract class Video {
+public abstract class Video implements ReadUpdateInterface {
     private String denumire;
     private float nota;
     private Date data_aparitie;

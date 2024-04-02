@@ -1,6 +1,10 @@
 package model.video_service;
 
-public class Episod {
+import model.ReadUpdateInterface;
+
+import java.util.Scanner;
+
+public class Episod implements ReadUpdateInterface {
     private int episod_id;
     private int serial_id;
     private String denumire;
@@ -63,5 +67,54 @@ public class Episod {
                 "\n\tnumar = " + numar +
                 "\n\tdurata = " + durata +
                 "\n}\n";
+    }
+
+    @Override
+    public void read() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter episode ID: ");
+        setEpisod_id(sc.nextInt());
+        sc.nextLine();
+
+        System.out.println("Enter episode title: ");
+        setDenumire(sc.nextLine());
+
+        System.out.println("Enter episode number: ");
+        setNumar(sc.nextInt());
+        sc.nextLine();
+
+        System.out.println("Enter episode duration: ");
+        setDurata(sc.nextInt());
+        sc.nextLine();
+    }
+
+    @Override
+    public void update() {
+        Scanner sc = new Scanner(System.in);
+        String option;
+
+        System.out.println("Update episode title? (y/n): ");
+        option = sc.nextLine();
+        if (option.equalsIgnoreCase("y")) {
+            System.out.println("Enter episode title: ");
+            setDenumire(sc.nextLine());
+        }
+
+        System.out.println("Update episode number? (y/n): ");
+        option = sc.nextLine();
+        if (option.equalsIgnoreCase("y")) {
+            System.out.println("Enter episode number: ");
+            setNumar(sc.nextInt());
+            sc.nextLine();
+        }
+
+        System.out.println("Update episode duration? (y/n): ");
+        option = sc.nextLine();
+        if (option.equalsIgnoreCase("y")) {
+            System.out.println("Enter episode duration: ");
+            setDurata(sc.nextInt());
+            sc.nextLine();
+        }
     }
 }
