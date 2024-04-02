@@ -11,6 +11,8 @@ public class Episod implements ReadUpdateInterface {
     private int numar;
     private int durata;
 
+    public Episod() {}
+
     public Episod(int episod_id, int serial_id, String denumire, int numar, int durata) {
         this.episod_id = episod_id;
         this.serial_id = serial_id;

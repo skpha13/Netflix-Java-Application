@@ -6,6 +6,10 @@ import java.util.Scanner;
 public class Film extends Video {
     private int film_id;
 
+    public Film() {
+        super();
+    }
+
     public Film(int film_id, String denumire, float nota, Date data_aparitie) {
         super(denumire, nota, data_aparitie);
         this.film_id = film_id;

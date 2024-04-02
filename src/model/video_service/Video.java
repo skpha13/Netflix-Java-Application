@@ -9,6 +9,8 @@ public abstract class Video implements ReadUpdateInterface {
     private float nota;
     private Date data_aparitie;
 
+    public Video() {}
+
     public Video(String denumire, float nota, Date data_aparitie) {
         this.denumire = denumire;
         this.nota = nota;

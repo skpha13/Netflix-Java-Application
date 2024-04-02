@@ -9,6 +9,10 @@ public class Serial extends Video {
 
     private ArrayList<Episod> episoade;
 
+    public Serial() {
+        super();
+    }
+
     public Serial(int serial_id, ArrayList<Episod> episoade, String denumire, float nota, Date data_aparitie) {
         super(denumire, nota, data_aparitie);
         this.serial_id = serial_id;
