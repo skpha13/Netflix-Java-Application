@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class FilmRepository implements GenericRepository<Film> {
     private final DatabaseConnection db;
@@ -88,6 +90,8 @@ public class FilmRepository implements GenericRepository<Film> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        Collections.sort(filme);
         return filme;
     }
 

@@ -3,7 +3,7 @@ package model.video_service;
 import java.sql.Date;
 import java.util.Scanner;
 
-public class Film extends Video {
+public class Film extends Video implements Comparable<Film> {
     private int film_id;
 
     public Film() {
@@ -70,5 +70,10 @@ public class Film extends Video {
             setNota(sc.nextFloat());
             sc.nextLine();
         }
+    }
+
+    @Override
+    public int compareTo(Film o) {
+        return Float.compare(this.getNota(), o.getNota());
     }
 }
