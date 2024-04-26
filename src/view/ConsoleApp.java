@@ -9,6 +9,7 @@ import model.video_service.Episod;
 import model.video_service.Film;
 import model.video_service.Serial;
 import persistence.*;
+import persistence.services.UserSubscriptionService;
 import service.Audit;
 import service.DatabaseConnection;
 
@@ -25,6 +26,7 @@ public class ConsoleApp {
     private final SubscriptieFilmRepository subscriptieFilmRepository;
     private final SubscriptieSerialRepository subscriptieSerialRepository;
     private final EpisodRepository episodRepository;
+    private final UserSubscriptionService userSubscriptionService;
 
     private ConsoleApp() {
         DatabaseConnection db = DatabaseConnection.getInstance();
@@ -36,6 +38,7 @@ public class ConsoleApp {
         subscriptieRepository = new SubscriptieRepository(db);
         subscriptieFilmRepository = new SubscriptieFilmRepository(db);
         subscriptieSerialRepository = new SubscriptieSerialRepository(db);
+        userSubscriptionService = new UserSubscriptionService(utilizatorRepository, subscriptieRepository);
     }
     public static ConsoleApp getInstance() {
         if (instance == null)
@@ -87,22 +90,7 @@ public class ConsoleApp {
 
             switch (option) {
                 case 1 -> {
-                    System.out.println(Arrays.toString(utilizatorRepository.getAll().toArray()));
-                    System.out.println("Enter user ID: ");
-
-                    int userId = sc.nextInt();
-                    sc.nextLine();
-
-                    System.out.println(Arrays.toString(subscriptieRepository.getAll().toArray()));
-                    System.out.println("Enter subscription ID: ");
-
-                    int subscriptionId = sc.nextInt();
-                    sc.nextLine();
-
-                    Utilizator u = utilizatorRepository.get(userId);
-                    u.setSubscriptie_id(subscriptionId);
-
-                    utilizatorRepository.update(u);
+                    userSubscriptionService.connectUserToSubscription();
                 }
                 case 2 -> {
                     System.out.println(Arrays.toString(filmRepository.getAll().toArray()));
