@@ -17,3 +17,12 @@ used in this project.
 
 > The image above illustrates the database structure used in this project.
 
+## List of Possible Actions
+- **CREATE** an user account
+- **DELETE** an user account
+- **UPDATE** an user account
+- **ADD** new movies/tv series or episodes
+- **DELETE** movie/tv series or episode
+- **ADD** an episode to a tv series
+- **ADD** an movie/tv series to a subscrition
+- **AUDIT** all actions performed on the database

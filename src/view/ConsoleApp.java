@@ -1,7 +1,6 @@
 package view;
 
 import exceptions.OperationNotSupportedException;
-import model.AuditEntity;
 import model.ReadUpdateInterface;
 import model.Utilizator;
 import model.associative_entities.SubscriptieFilm;
@@ -14,25 +13,22 @@ import service.Audit;
 import service.DatabaseConnection;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class ConsoleApp {
     private static ConsoleApp instance;
-    private DatabaseConnection db;
-    private Audit audit;
-    private UtilizatorRepository utilizatorRepository;
-    private SubscriptieRepository subscriptieRepository;
-    private FilmRepository filmRepository;
-    private SerialRepository serialRepository;
-    private SubscriptieFilmRepository subscriptieFilmRepository;
-    private SubscriptieSerialRepository subscriptieSerialRepository;
-    private EpisodRepository episodRepository;
+    private final UtilizatorRepository utilizatorRepository;
+    private final SubscriptieRepository subscriptieRepository;
+    private final FilmRepository filmRepository;
+    private final SerialRepository serialRepository;
+    private final SubscriptieFilmRepository subscriptieFilmRepository;
+    private final SubscriptieSerialRepository subscriptieSerialRepository;
+    private final EpisodRepository episodRepository;
 
     private ConsoleApp() {
-        db = DatabaseConnection.getInstance();
-        audit = Audit.getInstance();
+        DatabaseConnection db = DatabaseConnection.getInstance();
+        Audit.getInstance();
         utilizatorRepository = new UtilizatorRepository(db);
         filmRepository = new FilmRepository(db);
         episodRepository = new EpisodRepository(db);
@@ -50,7 +46,7 @@ public class ConsoleApp {
 
     public void start() {
         Scanner sc = new Scanner(System.in);
-        int option = -1;
+        int option;
 
         while (true) {
             printMenu();
@@ -66,7 +62,7 @@ public class ConsoleApp {
                 case 5 -> connectMenu();
                 case 6 -> {
                     try {
-                        audit.log_multiple(db.audit());
+                        Audit.log_multiple(DatabaseConnection.audit());
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -81,7 +77,7 @@ public class ConsoleApp {
 
     public void connectMenu() {
         Scanner sc = new Scanner(System.in);
-        int option = -1;
+        int option;
 
         while (true) {
             printConnectMenu();
@@ -166,7 +162,7 @@ public class ConsoleApp {
 
     public void deleteMenu() {
         Scanner sc = new Scanner(System.in);
-        int option = -1;
+        int option;
 
         while (true) {
             printDeleteMenu();
@@ -205,7 +201,7 @@ public class ConsoleApp {
 
     public void updateMenu() {
         Scanner sc = new Scanner(System.in);
-        int option = -1;
+        int option;
 
         while (true) {
             printUpdateMenu();
@@ -245,7 +241,7 @@ public class ConsoleApp {
 
     public void readMenu() {
         Scanner sc = new Scanner(System.in);
-        int option = -1;
+        int option;
 
         while (true) {
             printReadMenu();
@@ -269,7 +265,7 @@ public class ConsoleApp {
 
     public void createMenu() {
         Scanner sc = new Scanner(System.in);
-        int option = -1;
+        int option;
 
         while (true) {
             printCreateMenu();
@@ -315,9 +311,7 @@ public class ConsoleApp {
                 case 0 -> {
                     return;
                 }
-                default -> {
-                    System.out.println("~ INVALID OPTION");
-                }
+                default -> System.out.println("~ INVALID OPTION");
             }
         }
     }
