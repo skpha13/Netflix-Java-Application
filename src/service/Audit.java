@@ -15,6 +15,8 @@ public class Audit {
         try{
             path = "audit.csv";
             writer  = new FileWriter(path);
+            writer.append("USER, TABLE, ACTION, TIMESTAMP\n");
+            writer.flush();
         }catch (Exception e){
             System.out.println("Couldn`t open file for audit");
         }
@@ -33,7 +35,9 @@ public class Audit {
             writer.append(", ");
             writer.append(audit.getTable());
             writer.append(", ");
-            writer.append(audit.getSqlStatement());
+            writer.append(audit.getActionName());
+            writer.append(", ");
+            writer.append(audit.getTimestamp());
             writer.append("\n");
 
             writer.flush();
@@ -45,12 +49,7 @@ public class Audit {
     public static void log_multiple(ArrayList<AuditEntity> list) {
         try {
             for (var item: list) {
-                writer.append(item.getSchema());
-                writer.append(", ");
-                writer.append(item.getTable());
-                writer.append(", ");
-                writer.append(item.getSqlStatement());
-                writer.append("\n");
+                Audit.log(item);
             }
 
             writer.flush();

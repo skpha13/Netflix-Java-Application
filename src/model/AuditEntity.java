@@ -1,14 +1,20 @@
 package model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class AuditEntity {
     private String schema;
     private String table;
-    private String sqlStatement;
+    private String actionName;
 
-    public AuditEntity(String schema, String table, String sqlStatement) {
+    private LocalDateTime timestamp;
+
+    public AuditEntity(String schema, String table, String actionName, LocalDateTime timestamp) {
         this.schema = schema;
         this.table = table;
-        this.sqlStatement = sqlStatement;
+        this.actionName = actionName;
+        this.timestamp = timestamp;
     }
 
     public String getSchema() {
@@ -19,7 +25,12 @@ public class AuditEntity {
         return table;
     }
 
-    public String getSqlStatement() {
-        return sqlStatement;
+    public String getActionName() {
+        return actionName;
+    }
+
+    public String getTimestamp() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return timestamp.format(formatter);
     }
 }

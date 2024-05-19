@@ -22,7 +22,8 @@ audit policy audit_all_operations;
 -- under UTILIZATOR user
 select object_schema,
        object_name,
-       sql_text
+       action_name,
+       event_timestamp
 from UNIFIED_AUDIT_TRAIL
 where current_user = 'UTILIZATOR' and UNIFIED_AUDIT_POLICIES = 'AUDIT_ALL_OPERATIONS';
 
